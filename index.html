@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Отчёт студента: Аудит рабочего пространства</title>
+    <style>
+      :root {
+        --bg: #deadd6;
+        --card: #f2a1e9;
+        --text: #18212f;
+        --muted: #5f6b7a;
+        --line: #dde6f0;
+        --primary: #2457d6;
+        --primary2: #4f86ff;
+        --soft: #ecf3ff;
+        --green: #0f766e;
+        --warn: #9a6700;
+        --shadow: 0 14px 36px rgba(24, 33, 47, 0.1);
+        --radius: 22px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+        color: var(--text);
+        background: linear-gradient(180deg, #e171f3 0%, #f2f5fb 100%);
+        line-height: 1.58;
+      }
+      .wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 28px 18px 56px;
+      }
+      .hero {
+        background: linear-gradient(135deg, #a12f92 0%, #4d0944 100%);
+        color: #fff;
+        border-radius: 28px;
+        padding: 28px 26px;
+        box-shadow: var(--shadow);
+      }
+      .eyebrow {
+        display: inline-block;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.14);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        margin-bottom: 14px;
+      }
+      h1 {
+        margin: 0;
+        font-size: clamp(28px, 4vw, 42px);
+        line-height: 1.08;
+      }
+      .hero p {
+        margin: 14px 0 0;
+        max-width: 860px;
+        font-size: 17px;
+        opacity: 0.98;
+      }
+      .nav {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 14px;
+      }
+      .btn {
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 11px 16px;
+        border-radius: 14px;
+        font-weight: 700;
+        transition: 0.2s ease;
+        border: 1px solid transparent;
+        cursor: pointer;
+      }
+      .btn.primary {
+        background: #fff;
+        color: #1f4ec9;
+      }
+      .btn.secondary {
+        background: rgba(255, 255, 255, 0.12);
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+      .section {
+        margin-top: 18px;
+        background: var(--card);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        border: 3px solid #000000;
+        padding: 24px 22px;
+      }
+      .section:hover {
+        transform: scale(1.1);
+      }
+      .section h2 {
+        margin: 0 0 10px;
+        font-size: 26px;
+        line-height: 1.15;
+      }
+      .lead {
+        margin: 0 0 14px;
+        color: var(--muted);
+        font-size: 16px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 16px;
+        background: #fff;
+      }
+      .card h3 {
+        margin: 0 0 8px;
+        font-size: 19px;
+      }
+      .static-content {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 12px 14px;
+        background: #fcfdfd;
+        color: var(--text);
+        font-size: 16px;
+      }
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+      }
+      .sum-card {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 16px;
+      }
+      .sum-card strong {
+        display: block;
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .big {
+        font-size: 34px;
+        font-weight: 800;
+        color: var(--primary);
+        line-height: 1;
+        margin-top: 8px;
+      }
+      .gallery {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .ph {
+        border: 2px dashed #cfdcf0;
+        border-radius: 18px;
+        min-height: 220px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--muted);
+        text-align: center;
+        padding: 20px;
+        background: #fbfcfe;
+      }
+      .footer {
+        margin-top: 18px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      @media (max-width: 900px) {
+        .grid,
+        .summary,
+        .gallery {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media print {
+        body {
+          background: #fff;
+        }
+        .hero,
+        .section {
+          box-shadow: none;
+        }
+        .btn,
+        .nav {
+          display: none !important;
+        }
+      }
+      .band.warn {
+        background: #fffbeb;
+        color: var(--warn);
+        border: 1px solid #fde68a;
+      }
+      .band {
+        padding: 12px 14px;
+        border-radius: 16px;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <section class="hero">
+        <div class="eyebrow">Итоговый отчёт</div>
+        <h1>Аудит рабочего пространства и проект улучшения</h1>
+        <p>
+          Результаты аудита рабочего места и план модернизации оборудования.
+        </p>
+        <div class="nav">
+          <button class="btn secondary" onclick="window.print()">
+            Сохранить как PDF / печать
+          </button>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>1. Общая информация</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>ФИО / автор</h3>
+            <div class="static-content">Балханова Дарья Дмитриевна</div>
+          </div>
+          <div class="card">
+            <h3>Объект анализа</h3>
+            <div class="static-content">Рабочее место с ноутбуком</div>
+          </div>
+        </div>
+        <div style="margin-top: 14px">
+          <h3>Назначение рабочего пространства</h3>
+          <div class="static-content">
+            Ноутбук используется для работы в офисных приложениях Word, Excel,
+            Project, Visio. Аппаратная конфигурация (процессор i7 13-го
+            поколения, 16 ГБ ОЗУ, видеокарта RTX 4050) обеспечивает высокую
+            производительность для рабочих и учебных задач.
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>2. Итоги чек-листа</h2>
+        <div class="summary">
+          <div class="sum-card">
+            <strong>Набрано баллов</strong>
+            <div class="big">72</div>
+          </div>
+          <div class="sum-card">
+            <strong>Максимум</strong>
+            <div class="big">92</div>
+          </div>
+          <div class="sum-card">
+            <strong>Процент</strong>
+            <div class="big">78%</div>
+          </div>
+          <div class="sum-card">
+            <strong>Результат</strong>
+            <div style="margin-top: 8px; font-weight: 700">
+              <div class="band warn">
+                Хорошая организация, есть точки для улучшения
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>3. Ключевые наблюдения</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Сильные стороны</h3>
+            <div class="static-content">
+              <ul>
+                <li>
+                  Мощная аппаратная база (процессор i7 13-го поколения, 16 ГБ
+                  оперативной памяти, видеокарта 4050).
+                </li>
+                <li>Высокая мобильность устройства.</li>
+                <li>Отличный запас производительности.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Проблемные зоны</h3>
+            <div class="static-content">
+              <ul>
+                <li>Слишком близкое расположение экрана при работе.</li>
+                <li>Неправильная осанка из-за неудобного угла обзора.</li>
+                <li>Перегрев ноутбука при нагрузках.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 14px">
+          <h3>Три улучшения с наибольшим эффектом</h3>
+          <div class="static-content">
+            <ol>
+              <li>Установка охлаждающей подставки.</li>
+              <li>Подключение дополнительного экрана (монитора).</li>
+              <li>
+                Организация стационарного рабочего места с внешней периферией и
+                удобным креслом.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>4. Проект улучшения</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Что можно улучшить без существенных затрат</h3>
+            <div class="static-content">
+              <ul>
+                <li>
+                  Регулярное выполнение зрительной гимнастики и соблюдение
+                  перерывов в работе.
+                </li>
+                <li>Осознанный контроль осанки.</li>
+                <li>
+                  Отодвигание ноутбука на безопасное для глаз расстояние (с
+                  использованием отдельной клавиатуры).
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Что потребует бюджета, но даст заметный эффект</h3>
+
+            <div class="static-content">
+              <ul>
+                <li>Приобретение дополнительного экрана/монитора.</li>
+                <li>
+                  Покупка внешней периферии для трансформации ноутбука в
+                  полноценную стационарную станцию.
+                </li>
+                <li>Приобретение эргономичного офисного кресла.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 14px">
+          <h3>Обоснование проекта</h3>
+          <div class="static-content">
+            Дополнительный монитор и внешняя периферия позволят вынести рабочую
+            область на оптимальное расстояние и уровень глаз, что снизит
+            нагрузку на зрение и шейный отдел позвоночника. Охлаждающая
+            подставка защитит мощные компоненты ноутбука (i7 / RTX 4050) от
+            троттлинга и перегрева при длительной эксплуатации. Удобное кресло
+            обеспечит правильную поддержку спины в течение всего рабочего дня,
+            повышая общую продуктивность при работе с документами, таблицами и
+            графиками.
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>5. Визуальные материалы</h2>
+        <p class="lead">Схема расстановки и фото рабочего места.</p>
+        <div class="gallery">
+          <div class="ph"><img src="img1.jpg" /></div>
+          <div class="ph"><img src="img2.png" /></div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>6. Итоговый вывод</h2>
+        <div class="static-content">
+          Аппаратные возможности ноутбука полностью перекрывают потребности для
+          работы в пакетах Microsoft Office, Project и Visio. Однако форм-фактор
+          устройства создает проблемы с эргономикой (близкий экран, нагрузка на
+          осанку) и вызывает нагрев. Переход к конфигурации «ноутбук как
+          системный блок» с подключением внешнего монитора, клавиатуры и покупка
+          эргономичного кресла являются наиболее рациональными мерами для
+          сохранения здоровья и повышения эффективности труда.
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
